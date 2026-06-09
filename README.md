@@ -51,7 +51,7 @@ python analyzeQpcr.py --layout /path/to/layout.xlsx --results /path/to/results.x
 
 Optionally, the script accepts two other arguments:
 
-'''
+```
 --thresh / -t Maximum acceptable standard deviation of Ct replicates.
               Wells exceeding this threshold will have their worst outlier 
               removed before re-evaluation. If the deviation remains above 
@@ -61,4 +61,4 @@ Optionally, the script accepts two other arguments:
 --prefix / -p 'Prefix for output files (<prefix>_failedWells.log, 
               <prefix>_results.csv, <prefix>_qpcrResults.png). Defaults to 
               the current date (YYYYMMDD). 
-''' 
+``` 
