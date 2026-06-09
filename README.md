@@ -45,9 +45,9 @@ Fill out the 384-well plate layout sheets for samples and primers. The maximum n
 
 Once the data have been exported, the basic execution of the script is:
 
-'''
+```
 python analyzeQpcr.py --layout /path/to/layout.xlsx --results /path/to/results.xlsx
-'''
+```
 
 Optionally, the script accepts two other arguments:
 
@@ -61,4 +61,23 @@ Optionally, the script accepts two other arguments:
 --prefix / -p 'Prefix for output files (<prefix>_failedWells.log, 
               <prefix>_results.csv, <prefix>_qpcrResults.png). Defaults to 
               the current date (YYYYMMDD). 
-``` 
+```
+
+The three output files are:
+
+```
+<prefix>_failedWells.log
+   A text file containing sample-primer pairs that failed based on Ct 
+   standard deviation or Ct mean >= 30. 
+
+<prefix>_results.csv
+   A CSV with columns for sample (squid), $\Delta Ct$ mean, $\Delta Ct$ 
+   standard deviation (with error propagation), and predicted sex of the
+   individual.
+
+<prefix>_qpcrResults.png
+   Data visualization of <prefix>_results.csv, as seen in the following 
+   image.
+```
+
+![equation](assets/20260411_qpcrResults.png) 
