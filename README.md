@@ -80,4 +80,6 @@ The three output files are:
    image.
 ```
 
-<img src="assets/20260411_qpcrResults.png" width="50%">
+<div align="center">
+  <img src="assets/20260411_qpcrResults.png" width="50%">
+</div>
