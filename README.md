@@ -80,4 +80,4 @@ The three output files are:
    image.
 ```
 
-![equation](assets/20260411_qpcrResults.png) 
+<img src="assets/20260411_qpcrResults.png" width="50%">
