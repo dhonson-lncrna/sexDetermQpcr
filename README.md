@@ -46,7 +46,7 @@ Fill out the 384-well plate layout sheets for samples and primers. The maximum n
 Once the data have been exported, the basic execution of the script is:
 
 ```
-python analyzeQpcr.py --layout /path/to/layout.xlsx --results /path/to/results.xlsx
+python analyzeQpcr.py /path/to/layout.xlsx /path/to/results.xlsx
 ```
 
 Optionally, the script accepts two other arguments:
@@ -83,3 +83,11 @@ The three output files are:
 <div align="center">
   <img src="assets/20260411_qpcrResults.png" width="50%">
 </div>
+
+## Example
+
+To check that you have the necessary packages, run:
+
+```
+python analyzeQpcr.py example/20260408_qpcrLayout.xlsx example/20260408_hatchlings.xls
+```
