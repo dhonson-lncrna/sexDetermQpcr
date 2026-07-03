@@ -21,8 +21,9 @@ Due to experimental noise, the exact $\Delta Ct$ is rarely exactly 0 and 1. As s
 
 $$\Delta Ct_{female} - \Delta Ct_{unknown} = \Delta \Delta Ct$$
 
-$$\text{if } \Delta \Delta Ct \approx 0 \rightarrow female \approx unknown \rightarrow \text{female}$$
-$$\text{if } \Delta \Delta Ct \approx 1 \rightarrow female \lessthan unknown \rightarrow \text{male}$$
+$$\text{if } \Delta \Delta Ct \approx 0 \rightarrow \text{female} \approx \text{unknown} \rightarrow \text{female}$$
+
+$$\text{if } \Delta \Delta Ct \approx 1 \rightarrow \text{female} < \text{unknown} \rightarrow \text{male}$$
 
 The male standard should always be included to make sure that its $\Delta \Delta Ct$ value is approximately 1. If that is not the case, the experiment should be considered invalid. 
 
