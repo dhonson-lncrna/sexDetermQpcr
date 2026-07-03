@@ -17,6 +17,15 @@ $$\text{if } \Delta Ct \approx 0 \rightarrow Z:A = 1:1 \rightarrow \text{male}$$
 
 $$\text{if } \Delta Ct \approx 1 \rightarrow Z:A = 1:2 \rightarrow \text{female}$$
 
+Due to experimental noise, the exact $\Delta Ct$ is rarely exactly 0 and 1. As such, male and female standards are required for each run. The final calculation is:
+
+$$\Delta Ct_{female} - \Delta Ct_{unknown} = \Delta \Delta Ct$$
+
+$$\text{if } \Delta \Delta Ct \approx 0 \rightarrow female \approx unknown \rightarrow \text{female}$$
+$$\text{if } \Delta \Delta Ct \approx 1 \rightarrow female \lessthan unknown \rightarrow \text{male}$$
+
+The male standard should always be included to make sure that its $\Delta \Delta Ct$ value is approximately 1. If that is not the case, the experiment should be considered invalid. 
+
 The primers used for the protocol are:
 
 | Name | Alias | Sequence | Product Length | Target | Efficiency |
@@ -71,7 +80,7 @@ The three output files are:
    standard deviation or Ct mean >= 30. 
 
 <prefix>_results.csv
-   A CSV with columns for sample (squid), $\Delta Ct$ mean, $\Delta Ct$ 
+   A CSV with columns for sample (squid), $\Delta \Delta Ct$, $\Delta \Delta Ct$ 
    standard deviation (with error propagation), and predicted sex of the
    individual.
 
@@ -81,7 +90,7 @@ The three output files are:
 ```
 
 <div align="center">
-  <img src="assets/20260411_qpcrResults.png" width="50%">
+  <img src="assets/20260703_qpcrResults.png" width="50%">
 </div>
 
 ## Example
