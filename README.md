@@ -91,7 +91,7 @@ The three output files are:
 ```
 
 <div align="center">
-  <img src="assets/20260703_qpcrResults.png" width="50%">
+  <img src="assets/20260703_exampleResults.png" width="50%">
 </div>
 
 ## Example
