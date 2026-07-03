@@ -69,7 +69,7 @@ def collect_cts(layout,
     return ct_dict
 
 def analyzer(ct_dict,
-             thresh = 0.1,
+             thresh = 0.3,
              prefix = None):
     '''
     Averages Ct values, filters out poor results (high deviation, Ct > 30), 
@@ -153,9 +153,30 @@ def analyzer(ct_dict,
             sex = 'm'
         std = 0.5 * np.sqrt(pdict['chrZ'][1]**2 + pdict['chrA'][1]**2)
         delta_ls.append((squid,delta,std,sex))
+
+    delta_dict = {}
+    for squid, pdict in mean_dict.items():
+        delta = pdict['chrZ'][0] - pdict['chrA'][0]
+        std = 0.5 * np.sqrt(pdict['chrZ'][1]**2 + pdict['chrA'][1]**2)
+        delta_dict[squid] = (delta, std)
+
+    f_delta = delta_dict['femaleStandard'][0]
+    f_std = delta_dict['femaleStandard'][1]
+    dd_ls = []
+    for squid, vals in delta_dict.items():
+        ddct = f_delta - vals[0]
+        if ddct > 0.6:
+            sex = 'm'
+        elif ddct < 0.4:
+            sex = 'f'
+        else:
+            sex  = 'ambig'
+        ddstd = 0.5 * np.sqrt(f_std**2 + vals[1]**2)
+        dd_ls.append((squid, ddct, ddstd, sex))
+        
     
-    df = pl.DataFrame(delta_ls, 
-                      schema=['squid','mean','stdev','sex'],
+    df = pl.DataFrame(dd_ls, 
+                      schema=['squid','∆∆Ct','stdev','sex'],
                       orient='row').sort('squid')
     df = df.sort('squid')
     df.write_csv(outfile)
@@ -184,9 +205,10 @@ def plot_results(df,
                            layout='constrained')
     
     cmap={'m':'#1B76B7',
-          'f':'#F58817'}
+          'f':'#F58817',
+          'ambig':'gray'}
     for row in df.iter_rows(named=True):
-        ax.errorbar(row['mean'], row['squid'],
+        ax.errorbar(row['∆∆Ct'], row['squid'],
                     xerr=row['stdev'],
                     fmt='o',
                     color=cmap[row['sex']],
@@ -197,9 +219,9 @@ def plot_results(df,
                     markersize=2)
     
     ax.margins(y=0.1)
-    ax.axvline(1,color='gray',linewidth=1,zorder=0,ls=':')
-    ax.set_xticks(np.arange(0.5,2.5,0.5))
-    ax.set_xlabel('∆Ct\n(chrZ - chrA)')
+    ax.axvline(0.5,color='gray',linewidth=1,zorder=0,ls=':')
+    ax.set_xticks([0,0.5,1,1.5])
+    ax.set_xlabel('∆∆Ct\n(femaleStandard - squid)')
     
     plt.savefig(figname,format='png',dpi=600)
     plt.close()
